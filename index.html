@@ -3388,8 +3388,9 @@ function descontarStockVarianteTienda(pid,talla,colorNombre,qty){
     return Promise.resolve({ok:false,motivo:'Sin conexión a la base de datos'});
   }
   return db.ref('catalogo/'+pid+'/stockPorVariante/'+key).transaction(function(actual){
-    actual=(typeof actual==='number')?actual:0;
-    if(actual<qty) return; // cancela la transacción si no alcanza
+    if(actual === null) return actual; // deja pasar el null inicial de Firebase
+actual = (typeof actual === 'number') ? actual : 0;
+if(actual < qty) return; // cancela si no alcanza
     return actual-qty;
   }).then(function(result){
     if(!result.committed){
