@@ -4618,7 +4618,7 @@ function loginERP(){
         if(rolEncontrado){
           /* Paso 4a: credenciales correctas — sesion_erp ya está activa, redirigir */
           localStorage.setItem("rol", rolEncontrado);
-          window.location.href = "https://bysolem13-blip.github.io/by_solem_erp/";
+          window.location.href = "https://bysolem13-blip.github.io/erp_solem/";
         } else {
           /* Paso 4b: credenciales incorrectas — rollback del flag sesiones_erp */
           db.ref("sesiones_erp/" + user.uid).remove().catch(function(){});
